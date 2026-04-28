@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sneaker Configurator · Project Tutorial P1</title>
+  <script type="module" crossorigin src="./assets/index-kKaQGBba.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B08tbmFB.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="eyebrow">Three.js Project Tutorials · P1</div>
+      <h1>Sneaker Configurator</h1>
+      <p id="stage-summary" class="summary">A production-shaped configurator checkpoint that evolves article by article.</p>
+      <label class="field">
+        <span>Preview stage</span>
+        <select id="stage-select">
+<option value="1">Stage 1 · Project Setup + Sneaker Asset Scaffold</option>
+<option value="2">Stage 2 · Material Atlas + Variant Binding</option>
+<option value="3">Stage 3 · Per-Part Swap — Laces, Outsole, Upper, Silhouette</option>
+<option value="4">Stage 4 · Anisotropic Suede + Mesh Fabric Shaders</option>
+<option value="5">Stage 5 · Decal Layer — Graphics, Monograms, Tongue Branding</option>
+<option value="6">Stage 6 · Mobile Performance — fitting the GPU budget</option>
+<option value="7">Stage 7 · URL Share State + Analytics Events</option>
+<option value="8">Stage 8 · AR Quick Look + Scene Viewer + WebXR Routing</option>
+<option value="9">Stage 9 · Photo Mode + Screenshot Generation</option>
+<option value="10">Stage 10 · Deploy + Shopify Product Page Integration</option>
+        </select>
+      </label>
+
+      <section class="group" data-min-stage="2">
+        <h2>Colorway</h2>
+        <div class="swatches" id="upper-swatches"></div>
+        <div class="swatches" id="accent-swatches"></div>
+        <div class="swatches" id="outsole-swatches"></div>
+        <div class="swatches" id="laces-swatches"></div>
+      </section>
+
+      <section class="group" data-min-stage="3">
+        <h2>Silhouette</h2>
+        <label class="field"><span>Preset</span><select id="silhouette-select">
+          <option value="runner">Runner</option>
+          <option value="court">Court</option>
+          <option value="trail">Trail</option>
+        </select></label>
+      </section>
+
+      <section class="group" data-min-stage="4">
+        <h2>Material</h2>
+        <label class="field"><span>Upper preset</span><select id="material-select">
+          <option value="mesh">Mesh knit</option>
+          <option value="suede">Suede</option>
+          <option value="leather">Premium leather</option>
+          <option value="gloss">Gloss synthetic</option>
+        </select></label>
+      </section>
+
+      <section class="group" data-min-stage="5">
+        <h2>Brand layer</h2>
+        <button id="decal-btn" class="ghost">Toggle tongue decal</button>
+      </section>
+
+      <section class="group" data-min-stage="6">
+        <h2>Performance</h2>
+        <button id="perf-btn" class="ghost">Toggle low-power mode</button>
+      </section>
+
+      <section class="group" data-min-stage="7">
+        <h2>Share + analytics</h2>
+        <button id="share-btn">Copy share URL</button>
+        <button id="random-btn" class="ghost">Surprise me</button>
+      </section>
+
+      <section class="group" data-min-stage="8">
+        <h2>AR routing</h2>
+        <button id="ar-btn">Simulate AR route</button>
+      </section>
+
+      <section class="group" data-min-stage="9">
+        <h2>Photo mode</h2>
+        <button id="photo-btn">Save PNG</button>
+      </section>
+
+      <section class="group" data-min-stage="10">
+        <h2>Storefront surface</h2>
+        <button id="cart-btn">Add to cart</button>
+        <pre id="embed-snippet" class="snippet"></pre>
+      </section>
+
+      <section class="group">
+        <h2>Event log</h2>
+        <div id="event-log" class="event-log" aria-live="polite"></div>
+      </section>
+    </aside>
+
+    <main class="viewer-shell">
+      <div class="toolbar">
+        <span id="build-pill" class="pill">Checkpoint</span>
+        <button id="rotate-btn" class="ghost">Toggle auto-rotate</button>
+        <button id="reset-btn" class="ghost">Reset</button>
+        <span id="notice" class="notice">Stand-in sneaker asset included. Swap for licensed glTF before public launch.</span>
+      </div>
+      <div id="viewer" class="viewer"></div>
+      <div class="hud">
+        <div id="stats" class="stats">booting…</div>
+        <div class="hud-copy">
+          <strong id="stage-title">Stage preview</strong>
+          <p id="stage-copy">Each stage toggles more of the production stack on.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
