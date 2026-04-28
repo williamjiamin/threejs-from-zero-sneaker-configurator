@@ -3,6 +3,7 @@
 This repo backs the Phase 2 project tutorial **Build a Sneaker Configurator from Scratch**.
 
 **Live demo:** https://threejs-from-zero-sneaker-configurator.pages.dev
+**GitHub repo:** https://github.com/williamjiamin/threejs-from-zero-sneaker-configurator
 
 ## What this contains
 
