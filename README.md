@@ -10,7 +10,7 @@ This repo backs the Phase 2 project tutorial **Build a Sneaker Configurator from
 - A buildable Vite app under `src/`
 - A production build in `dist/` after `npm run build`
 - Stage previews wired by `?stage=1..10` so each article can embed a specific checkpoint
-- A self-contained primitive stand-in asset so the repo runs immediately
+- A custom in-repo hero sneaker asset so the repo runs immediately
 
 ## Run locally
 
@@ -24,6 +24,11 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Automation
+
+- GitHub Actions CI runs on pushes, pull requests, and manual dispatch via `.github/workflows/ci.yml`.
+- Cloudflare Pages deploy automation is prewired in `.github/workflows/deploy-pages.yml` and becomes active once `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are added as repository secrets.
 
 ## Checkpoints
 
@@ -40,7 +45,7 @@ npm run build
 
 ## Important note
 
-The current build intentionally uses a primitive sneaker stand-in. Replace it with a licensed hero sneaker glTF before using the project as public-facing course material.
+The current build ships with a custom in-repo hero sneaker asset. Swap to brand-specific SKU geometry only when exact merchandising fidelity matters.
 
 ## Related docs
 
