@@ -46,5 +46,5 @@ button:hover, button:focus-visible, select:hover, select:focus-visible { outline
 .hud-copy p { color: var(--muted); margin: 8px 0 0; line-height: 1.6; }
 .event-log { min-height: 120px; max-height: 220px; overflow: auto; color: #ffd7b8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; white-space: pre-line; }
 .snippet { min-height: 120px; white-space: pre-wrap; background: #130903; color: #ffd7b8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
-@media (max-width: 1080px) { .app-shell { grid-template-columns: 1fr; } .sidebar { border-right: 0; border-bottom: 1px solid var(--border); } .viewer { min-height: 520px; } .hud { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .viewer-shell { padding: 16px; } .sidebar { padding: 20px 16px; } h1 { font-size: 34px; } .viewer { min-height: 380px; } }
+@media (max-width: 1080px) { .app-shell { grid-template-columns: 1fr; } .sidebar { border-right: 0; border-bottom: 1px solid var(--border); } .viewer { min-height: 560px; } .hud { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .viewer-shell { padding: 16px; } .sidebar { padding: 20px 16px; } h1 { font-size: 34px; } .viewer { min-height: 460px; } }

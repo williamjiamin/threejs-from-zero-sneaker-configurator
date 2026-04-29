@@ -538,10 +538,7 @@ function applySilhouette() {
     row.scale.set(1, 1, Math.max(0.92, preset.upperZ));
   });
   shoe.shadowPlane.scale.set(1.2 * preset.upperX, 0.58 * preset.upperZ, 1);
-  if (state.silhouette === "court") { controls.target.set(0.14, 0.92, 0); }
-  if (state.silhouette === "runner") { controls.target.set(0.18, 1.02, 0); }
-  if (state.silhouette === "trail") { controls.target.set(0.08, 1.16, 0); }
-  controls.update();
+  applyResponsiveFraming();
 }
 
 function applyPerformanceMode() {
@@ -570,7 +567,51 @@ function resize() {
   const height = viewer.clientHeight;
   renderer.setSize(width, height, false);
   camera.aspect = width / height;
+  applyResponsiveFraming();
+}
+
+function applyResponsiveFraming() {
+  const width = viewer.clientWidth || window.innerWidth;
+  const height = viewer.clientHeight || Math.max(1, window.innerHeight);
+  const compact = width <= 640;
+  const tablet = width <= 1080;
+
+  if (compact) {
+    camera.fov = 46;
+    camera.position.set(6.4, 1.34, 8.9);
+    controls.minDistance = 6.2;
+    controls.maxDistance = 13;
+  } else if (tablet) {
+    camera.fov = 40;
+    camera.position.set(5.6, 1.52, 7.9);
+    controls.minDistance = 5.6;
+    controls.maxDistance = 12;
+  } else {
+    camera.fov = 35;
+    camera.position.set(5.1, 1.7, 7.15);
+    controls.minDistance = 5;
+    controls.maxDistance = 11;
+  }
+
+  const target = getCameraTarget(compact, height);
+  controls.target.set(target.x, target.y, target.z);
   camera.updateProjectionMatrix();
+  controls.update();
+}
+
+function getCameraTarget(compact, height) {
+  const targets = {
+    court: { x: 0.14, y: 0.92, z: 0 },
+    runner: { x: 0.18, y: 1.02, z: 0 },
+    trail: { x: 0.08, y: 1.16, z: 0 },
+  };
+  const base = targets[state.silhouette];
+  if (!compact) return base;
+  return {
+    x: base.x - 0.14,
+    y: Math.max(0.82, base.y - (height < 430 ? 0.22 : 0.16)),
+    z: 0,
+  };
 }
 
 function computePrice() {
