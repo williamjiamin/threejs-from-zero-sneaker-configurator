@@ -1,0 +1,9 @@
+node_modules/
+dist/
+public/game/
+coverage/
+*.tsbuildinfo
+.env.local
+__pycache__/
+.pytest_cache/
+*.pyc

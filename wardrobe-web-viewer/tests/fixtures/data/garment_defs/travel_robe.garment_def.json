@@ -1,0 +1,43 @@
+{
+  "schema": "goag.garment_def.web.v1",
+  "id": "travel_robe",
+  "name": "Travel Robe",
+  "description": "A flowing travel robe with wide cuffs, a contrasting hem and a simple clasped sash.",
+  "model": {
+    "glb": "assets/garments/travel_robe.glb",
+    "unit": "m",
+    "up_axis": "Y",
+    "expected_height_m": 1.68
+  },
+  "material_slots": [
+    {"id": "fabric", "match_material": "fabric"},
+    {"id": "trim", "match_material": "trim"},
+    {"id": "hardware", "match_material": "hardware"}
+  ],
+  "colorways": [
+    {
+      "id": "midnight", "name": "Midnight", "swatch": "#475273",
+      "materials": {
+        "fabric": {"color": "#475273", "roughness": 0.89, "metalness": 0.0},
+        "trim": {"color": "#e3d7bc", "roughness": 0.75, "metalness": 0.0},
+        "hardware": {"color": "#a6aebd", "roughness": 0.32, "metalness": 0.64}
+      }
+    },
+    {
+      "id": "berry", "name": "Berry", "swatch": "#754c63",
+      "materials": {
+        "fabric": {"color": "#754c63", "roughness": 0.93, "metalness": 0.0},
+        "trim": {"color": "#dbb7c0", "roughness": 0.78, "metalness": 0.0},
+        "hardware": {"color": "#b68a7c", "roughness": 0.37, "metalness": 0.60}
+      }
+    },
+    {
+      "id": "sand", "name": "Sand", "swatch": "#b79b75",
+      "materials": {
+        "fabric": {"color": "#b79b75", "roughness": 0.92, "metalness": 0.0},
+        "trim": {"color": "#66503a", "roughness": 0.81, "metalness": 0.0},
+        "hardware": {"color": "#9f978a", "roughness": 0.43, "metalness": 0.54}
+      }
+    }
+  ]
+}

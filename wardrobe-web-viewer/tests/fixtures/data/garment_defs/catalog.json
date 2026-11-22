@@ -1,0 +1,7 @@
+{
+  "schema": "goag.wardrobe.catalog.v1",
+  "garment_defs": [
+    "data/garment_defs/field_coat.garment_def.json",
+    "data/garment_defs/travel_robe.garment_def.json"
+  ]
+}
