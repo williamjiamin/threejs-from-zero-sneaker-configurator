@@ -3,6 +3,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import footwearCatalog from './footwear/material_variants_v1.json';
+import { applyProceduralFinish, colorwayToUiState, variantsEnabled } from './footwear/material_variants_v1.js';
+import wovenNormalUrl from './footwear/textures/woven_normal.png?url';
+import smoothNormalUrl from './footwear/textures/smooth_normal.png?url';
+import grainNormalUrl from './footwear/textures/grain_normal.png?url';
 
 const deployUrl = 'https://threejs-from-zero-sneaker-configurator.pages.dev/';
 
@@ -146,10 +151,29 @@ halo.position.set(-0.15, 2.15, -1.7);
 halo.scale.set(7.8, 5.2, 1);
 scene.add(halo);
 
+// The enhancement defaults ON; the OFF gate leaves the legacy renderer state untouched.
+const footwearVariantsOn = variantsEnabled();
+const footwearNormalMaps = footwearVariantsOn ? Object.fromEntries(
+  Object.entries({ woven: wovenNormalUrl, smooth: smoothNormalUrl, grain: grainNormalUrl }).map(([id, uri]) => {
+    const texture = new THREE.TextureLoader().load(uri);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(1.6, 1.6);
+    texture.flipY = false;
+    texture.colorSpace = THREE.NoColorSpace;
+    return [id, texture];
+  })
+) : null;
+
 const materials = createMaterials();
 const shoe = buildShoe(materials);
 scene.add(shoe.group);
 
+// A named catalog colorway may seed the old per-part controls; existing shared state wins.
+if (footwearVariantsOn && params.has('colorway')) {
+  const namedSwatches = colorwayToUiState(footwearCatalog, params.get('colorway'));
+  if (namedSwatches) Object.assign(state, namedSwatches);
+}
 hydrateFromUrl();
 mountColorRow("upper-swatches", "upper", COLORS.upper);
 mountColorRow("accent-swatches", "accent", COLORS.accent);
@@ -512,6 +536,8 @@ function applyState(logChange = false, eventName = "", payload = {}) {
   materials.tongue.roughness = Math.max(0.32, preset.roughness - 0.08);
   materials.tongue.clearcoat = Math.max(0.02, preset.clearcoat * 0.75);
 
+  if (footwearVariantsOn) applyProceduralFinish(materials, footwearCatalog, state.material, footwearNormalMaps, { state });
+
   applySilhouette();
   shoe.decal.visible = stage >= 5 && state.decal;
   refreshSwatchStates();
@@ -649,6 +675,7 @@ function hydrateFromUrl() {
 }
 
 function syncUrl() {
+  if (footwearVariantsOn) params.delete("colorway");
   params.set("stage", String(stage));
   params.set("c", btoa(JSON.stringify(exportState())));
   history.replaceState(null, "", "?" + params.toString());

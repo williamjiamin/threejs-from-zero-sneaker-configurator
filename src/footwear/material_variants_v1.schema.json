@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:footwear:material-variants:v1",
+  "title": "Footwear material variants v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "asset_id", "normal_maps", "slots", "colorways", "finishes"],
+  "properties": {
+    "schema_version": { "const": "footwear.material-variants.v1" },
+    "asset_id": { "$ref": "#/$defs/identifier" },
+    "normal_maps": {
+      "type": "object", "minProperties": 1, "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "type": "object", "additionalProperties": false, "required": ["uri", "space"],
+          "properties": {
+            "uri": { "type": "string", "pattern": "^textures/[a-z0-9_-]+\\.png$" },
+            "space": { "const": "tangent" }
+          }
+        }
+      }, "additionalProperties": false
+    },
+    "slots": {
+      "type": "object", "minProperties": 1, "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "type": "object", "additionalProperties": false, "required": ["gltf_material_names", "swatches"],
+          "properties": {
+            "gltf_material_names": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/identifier" } },
+            "swatches": {
+              "type": "object", "minProperties": 1, "patternProperties": { "^[a-z][a-z0-9_]*$": { "$ref": "#/$defs/swatch" } },
+              "additionalProperties": false
+            }
+          }
+        }
+      }, "additionalProperties": false
+    },
+    "colorways": {
+      "type": "object", "minProperties": 1, "patternProperties": {
+        "^[a-z][a-z0-9_]*$": { "type": "object", "minProperties": 1, "patternProperties": { "^[a-z][a-z0-9_]*$": { "$ref": "#/$defs/identifier" } }, "additionalProperties": false }
+      }, "additionalProperties": false
+    },
+    "finishes": {
+      "type": "object", "minProperties": 1, "patternProperties": { "^[a-z][a-z0-9_]*$": { "$ref": "#/$defs/finish" } }, "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "normal": {
+      "type": "object", "additionalProperties": false, "required": ["map", "scale"],
+      "properties": { "map": { "$ref": "#/$defs/identifier" }, "scale": { "type": "number", "minimum": 0, "maximum": 2 } }
+    },
+    "swatch": {
+      "type": "object", "additionalProperties": false, "required": ["base_color", "roughness", "metallic", "normal"],
+      "properties": {
+        "base_color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "roughness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "metallic": { "type": "number", "minimum": 0, "maximum": 1 },
+        "normal": { "$ref": "#/$defs/normal" }
+      }
+    },
+    "finish": {
+      "type": "object", "additionalProperties": false, "required": ["roughness", "metallic", "clearcoat", "sheen", "normal"],
+      "properties": {
+        "roughness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "metallic": { "type": "number", "minimum": 0, "maximum": 1 },
+        "clearcoat": { "type": "number", "minimum": 0, "maximum": 1 },
+        "sheen": { "type": "number", "minimum": 0, "maximum": 1 },
+        "normal": { "$ref": "#/$defs/normal" }
+      }
+    }
+  }
+}
