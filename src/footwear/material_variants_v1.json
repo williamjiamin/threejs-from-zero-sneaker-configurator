@@ -1,0 +1,49 @@
+{
+  "schema_version": "footwear.material-variants.v1",
+  "asset_id": "demo_footwear",
+  "normal_maps": {
+    "woven": { "uri": "textures/woven_normal.png", "space": "tangent" },
+    "smooth": { "uri": "textures/smooth_normal.png", "space": "tangent" },
+    "grain": { "uri": "textures/grain_normal.png", "space": "tangent" }
+  },
+  "slots": {
+    "upper": {
+      "gltf_material_names": ["upper_fabric", "tongue_fabric"],
+      "swatches": {
+        "copper_woven": { "base_color": "#f97316", "roughness": 0.78, "metallic": 0.02, "normal": { "map": "woven", "scale": 0.36 } },
+        "ink_grain": { "base_color": "#111827", "roughness": 0.88, "metallic": 0.01, "normal": { "map": "grain", "scale": 0.44 } }
+      }
+    },
+    "accent": {
+      "gltf_material_names": ["accent_trim", "heel_trim"],
+      "swatches": {
+        "ink_trim": { "base_color": "#111827", "roughness": 0.35, "metallic": 0.06, "normal": { "map": "smooth", "scale": 0.12 } },
+        "bright_trim": { "base_color": "#38bdf8", "roughness": 0.4, "metallic": 0.04, "normal": { "map": "smooth", "scale": 0.08 } }
+      }
+    },
+    "outsole": {
+      "gltf_material_names": ["outsole_rubber"],
+      "swatches": {
+        "chalk_rubber": { "base_color": "#f8fafc", "roughness": 0.88, "metallic": 0.01, "normal": { "map": "grain", "scale": 0.18 } },
+        "ink_rubber": { "base_color": "#111827", "roughness": 0.92, "metallic": 0.0, "normal": { "map": "grain", "scale": 0.22 } }
+      }
+    },
+    "laces": {
+      "gltf_material_names": ["laces_thread"],
+      "swatches": {
+        "chalk_thread": { "base_color": "#f8fafc", "roughness": 0.72, "metallic": 0.0, "normal": { "map": "woven", "scale": 0.2 } },
+        "ink_thread": { "base_color": "#111827", "roughness": 0.8, "metallic": 0.0, "normal": { "map": "woven", "scale": 0.25 } }
+      }
+    }
+  },
+  "colorways": {
+    "copper_day": { "upper": "copper_woven", "accent": "ink_trim", "outsole": "chalk_rubber", "laces": "chalk_thread" },
+    "ink_night": { "upper": "ink_grain", "accent": "bright_trim", "outsole": "ink_rubber", "laces": "ink_thread" }
+  },
+  "finishes": {
+    "mesh": { "roughness": 0.78, "metallic": 0.02, "clearcoat": 0.04, "sheen": 0.24, "normal": { "map": "woven", "scale": 0.36 } },
+    "suede": { "roughness": 0.92, "metallic": 0.01, "clearcoat": 0.0, "sheen": 0.52, "normal": { "map": "grain", "scale": 0.46 } },
+    "leather": { "roughness": 0.46, "metallic": 0.03, "clearcoat": 0.22, "sheen": 0.12, "normal": { "map": "grain", "scale": 0.15 } },
+    "gloss": { "roughness": 0.22, "metallic": 0.06, "clearcoat": 0.58, "sheen": 0.0, "normal": { "map": "smooth", "scale": 0.06 } }
+  }
+}
