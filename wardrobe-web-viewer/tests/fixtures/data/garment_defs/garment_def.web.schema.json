@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:goag:garment_def:web:v1",
+  "title": "Minimal garment web adapter contract",
+  "description": "Documented adapter for this order; a canonical game schema was not included in the input archive.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "name", "description", "model", "material_slots", "colorways"],
+  "properties": {
+    "schema": {"const": "goag.garment_def.web.v1"},
+    "id": {"$ref": "#/$defs/id"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 120},
+    "description": {"type": "string", "maxLength": 500},
+    "model": {
+      "type": "object", "additionalProperties": false,
+      "required": ["glb", "unit", "up_axis", "expected_height_m"],
+      "properties": {
+        "glb": {"type": "string", "pattern": "^assets/garments/[a-zA-Z0-9_.-]+\\.glb$"},
+        "unit": {"const": "m"},
+        "up_axis": {"const": "Y"},
+        "expected_height_m": {"type": "number", "exclusiveMinimum": 0, "maximum": 3.5}
+      }
+    },
+    "material_slots": {
+      "type": "array", "minItems": 1, "maxItems": 12,
+      "items": {"type": "object", "additionalProperties": false,
+        "required": ["id", "match_material"],
+        "properties": {"id": {"$ref": "#/$defs/id"}, "match_material": {"$ref": "#/$defs/id"}}}
+    },
+    "colorways": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "object", "additionalProperties": false,
+        "required": ["id", "name", "swatch", "materials"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "name": {"type": "string", "minLength": 1, "maxLength": 120},
+          "swatch": {"$ref": "#/$defs/hex"},
+          "materials": {"type": "object", "minProperties": 1,
+            "additionalProperties": {"type": "object", "additionalProperties": false,
+              "required": ["color", "roughness", "metalness"],
+              "properties": {
+                "color": {"$ref": "#/$defs/hex"},
+                "roughness": {"type": "number", "minimum": 0, "maximum": 1},
+                "metalness": {"type": "number", "minimum": 0, "maximum": 1}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,47}$"},
+    "hex": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"}
+  }
+}
